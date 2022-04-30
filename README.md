@@ -12,7 +12,7 @@
 
  
 * 3베드룸 3화장실 가격 대략 250선 👍
-[호텔비교사이트 성인6 아이1](https://hotels.naver.com/item/rates?hotelFileName=hotel%3AVinpearl_Resort_Golf_Nam_Hoi_An&adultCnt=6&childAges=3&checkIn=2022-09-09&checkOut=2022-09-12)
+[호텔비교사이트 성인6 아이1](https://hotels.naver.com/item/rates?hotelFileName=hotel%3AVinpearl_Resort_Golf_Nam_Hoi_An&adultCnt=6&childAges=3&checkIn=2022-09-09&checkOut=2022-09-12)  
 *전체 식사제공 및 빈펄랜드 입장권 포함에 따라 가격은 달라질 수 있음*
 
 ### 장점
@@ -34,3 +34,4 @@
  * 관광지가 호이안 올드타운이 끝임. (올드타운도 그리 큰 관광지는 아니다.)
  * 베트남
  * 거의 대부분의 일정을 리조트내에서 끝낼듯.
+ * 아직까진 뱅기표가 비쌈. (물론 딴곳은 더 비쌈..)

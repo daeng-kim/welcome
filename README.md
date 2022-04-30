@@ -13,7 +13,7 @@
 [호텔비교사이트 성인6 아이1][https://hotels.naver.com/item/rates?hotelFileName=hotel%3AVinpearl_Resort_Golf_Nam_Hoi_An&adultCnt=6&childAges=3&checkIn=2022-09-09&checkOut=2022-09-12]
 *전체 식사제공 및 빈펄랜드 입장권 포함에 따라 가격은 달라질 수 있음*
 
-1. 장점
+### 장점
 * 빈펄랜드가 근처에 있어서 태오가 놀기 좋음
  - 빈펄랜드 : 캐리비안베이와 애버랜드 사파리가 있는 놀이동산
  - 입장권이 별매이기 때문에 1일 일정으로 사용
@@ -26,6 +26,6 @@
  - [호이안 올드타운][https://blog.naver.com/heart-en/222695403720]
 * 대영서정 말고는 다들 안가보신듯?
 
-3. 단점
+### 단점
  * 관광지가 호이안 올드타운이 끝임. (올드타운도 그리 큰 관광지는 아니다.)
  * 

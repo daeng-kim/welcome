@@ -12,7 +12,7 @@
 
  
 * 3베드룸 3화장실 가격 **250만원** 선 👍   
-[호텔비교사이트에서 확인](https://hotels.naver.com/item/rates?hotelFileName=hotel%3AVinpearl_Resort_Golf_Nam_Hoi_An&adultCnt=6&childAges=3&checkIn=2022-09-09&checkOut=2022-09-12)  
+[호텔비교사이트에서 확인해보기](https://hotels.naver.com/item/rates?hotelFileName=hotel%3AVinpearl_Resort_Golf_Nam_Hoi_An&adultCnt=6&childAges=3&checkIn=2022-09-09&checkOut=2022-09-12)  
 *전체 식사제공 및 빈펄랜드 입장권 포함에 따라 가격은 달라질 수 있음*
 
 ### 장점

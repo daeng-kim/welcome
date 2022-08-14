@@ -218,7 +218,8 @@
 
 ## 참고 사이트
 
+[주요위치 구글지도](https://maps.app.goo.gl/fo8gvL5QFu8CDm2QA)  
 [호이안 올드타운 블로그](https://blog.naver.com/mmm7962/222282249136)   
-[코코넛 바구니배 유튜브](https://www.youtube.com/watch?v=5O6s-p8EFYg)
-[빈원더스 유튜브](https://www.youtube.com/watch?v=kYeBKG8YrBc)
+[코코넛 바구니배 유튜브](https://www.youtube.com/watch?v=5O6s-p8EFYg)  
+[빈원더스 유튜브](https://www.youtube.com/watch?v=kYeBKG8YrBc)  
 

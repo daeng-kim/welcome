@@ -11,7 +11,7 @@
 ### 항공기
 
 * 에어프레미아 예약완료
-![image](https://github.com/daeng-kim/welcome/assets/76562946/a30d3040-35b2-4cab-b753-00707b49a542)
+* ![image](https://github.com/daeng-kim/welcome/assets/76562946/a30d3040-35b2-4cab-b753-00707b49a542)
 * 마일리지 등록 완료.
 * 24시간전 좌석체크인 필수 (좌석이 3-3-3 이라 중간에 앞뒤로 앉는게 좋을듯?)
 
@@ -74,8 +74,7 @@
 > 우리가 볼 경기는 LA클리퍼스 VS 애틀란타 호크스  
 > ![image](https://github.com/daeng-kim/welcome/assets/76562946/85847d0b-f840-41c2-9a14-68030302c17d)
 > 
-> 하단 링크 참조  
-> https://blog.naver.com/howshelives/223322037146
+> [관련 블로그 클릭](https://blog.naver.com/howshelives/223322037146)
 
 <br/>
   
@@ -94,9 +93,9 @@
 > 돌비극장안에는 최우식 싸인이 있다는듯  
 > 안성기 이병헌등 한국배우 싸인 손도장보고  
 > LA LA 랜드에서 기념품도 사고..  
-> 참고URL  
-> https://blog.naver.com/bk930626/223330694433
-> 
+> [참고URL 클릭](https://blog.naver.com/bk930626/223330694433)
+
+
 <br/>
 ---
 <br/>
@@ -106,27 +105,28 @@
 * 빠르게 일어나 `데스벨리` 로 이동
 * 대충 5시간 걸릴것으로 예상 - 휴식하면 +a
 * ![image](https://github.com/daeng-kim/welcome/assets/76562946/61b48095-5a4f-4fc7-97b6-f5b5db17f1f8)
-
 * 데스벨리 감상
 * 라스베가스로 이동 (2시간~2시간반)
 * 플라밍고 호텔 체크인
-* https://blog.naver.com/naeuiyoung/223180141737
+* [플라밍고 호텔 블로그 클릭](https://blog.naver.com/naeuiyoung/223180141737)
 * KA쇼 관람 (시간이 안되면 4일차에 관람)
 
 > ### 데스벨리
-> ![image](https://user-images.githubusercontent.com/76562946/184303611-44b81253-fde6-44a2-a8f4-e9209f295216.png)
-> 산에 있는 프랑스처럼 (실제 프랑스 사람들이 식민지 시절에) 꾸며둔  테마파크  
-> 입구까지 이동시간 대략 1시간.  
-> 입구에서 케이블카를 20분간 타고 산으로 올라간다.  
-> [바나힐 관련 블로그](https://blog.naver.com/jeju8253/222714191983)
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/84746102-b8c2-4c72-8fc0-750bac98c0f4)
+> (데스벨리 가는 길)  
+> 이름처럼 죽음의 계곡. 세계에서 가장 더운 온도로 기네스북 등재된 사막? 지형?  
+> 3월은 겨울철이라 가장 방문하기 좋은 때라고 한다. (여름엔 쪄죽는다고 한다)  
+> 가는길이 뻥 뚫리고 차도 없어서 도로에서 사진도 많이 찍는다.  
+> [데스벨리 참고 블로그 클릭](https://blog.naver.com/sunnydaymorning/223158847953)
+> [갔을때 참고하기 위한 루트 블로그](https://blog.naver.com/johnnykim68/222662528674)
 <br/>
 
-> ### 호이안
+> ### KA 쇼
 > ![image](https://user-images.githubusercontent.com/76562946/184519515-257f17d0-75cf-4bf5-a58f-1438c158ca3c.png)  
-> 도시 전체가 유네스코 문화유산으로 등록된 올드타운.  
-> 야경의 등불로 유명. 소원배(배에서 소원등 강으로 흘려보내는 것) 체험  
-> 야시장 및 주변 상권 구경  
-> [호이안 올드타운 블로그](https://blog.naver.com/heart-en/222695403720) 
+> 태양의 서커스에서 진행하는 라스베가스 3대쇼중 하나.  
+> 제일 유명한건 오쇼인데 일정상 불가능하여 카쇼로 결정  
+> [카쇼 블로그 클릭](https://blog.naver.com/ohshownet/223301003288)
+
 <br/>
 
 ### DAY 3 (9/11)

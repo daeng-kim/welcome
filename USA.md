@@ -11,7 +11,7 @@
 ### 항공기
 
 * 에어프레미아 예약완료
-* ![image](https://github.com/daeng-kim/welcome/assets/76562946/a30d3040-35b2-4cab-b753-00707b49a542)
+![image](https://github.com/daeng-kim/welcome/assets/76562946/a30d3040-35b2-4cab-b753-00707b49a542)
 * 마일리지 등록 완료.
 * 24시간전 좌석체크인 필수 (좌석이 3-3-3 이라 중간에 앞뒤로 앉는게 좋을듯?)
 
@@ -47,6 +47,24 @@
 * 체크인 후 석식
 * 그리피스 전망대 (라라랜드 나온곳)
 * https://blog.naver.com/se_in_the_galaxy/223375931068
+
+<br/>
+---
+<br/>
+
+### DAY 2 (3/17)
+
+* LA 전일정
+* 일어나서 식사하고 게티센터 이동
+* 게티센터 이동 후 관람
+* 아래 여행지들 여행
+  * 할리우드 거리
+  * 비버리힐즈
+  * 파머스마켓
+  * 그래미뮤지엄
+  * LACMA
+  * the last bookstores
+  
 
 
 > ### 한시장

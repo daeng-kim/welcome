@@ -1,4 +1,4 @@
-![image](https://github.com/daeng-kim/welcome/assets/76562946/a6ef8103-e574-46bb-884d-3d8e2e3fe03c)# 미서부 가족여행 계획
+# 미서부 가족여행 계획
 
 ## 준비사항
 

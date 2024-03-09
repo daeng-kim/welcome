@@ -178,7 +178,7 @@
 > ![image](https://github.com/daeng-kim/welcome/assets/76562946/eafdc0ca-936f-4d7d-a0db-67a854099fe3)  
 > 윈도우 바탕화면으로 엄청 유명한 협곡  
 > 미국 원주민이랑 무조건 같이 들어가야해서 투어예약 완.  
-> [관련 블로그 클릭](https://blog.naver.com/jewelry0822/223337428017)https://blog.naver.com/jewelry0822/223337428017
+> [관련 블로그 클릭](https://blog.naver.com/jewelry0822/223337428017)
 
 <br/>
 

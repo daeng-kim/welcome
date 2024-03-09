@@ -121,7 +121,7 @@
 <br/>
 
 > ### KA 쇼
-> ![image](https://user-images.githubusercontent.com/76562946/184519515-257f17d0-75cf-4bf5-a58f-1438c158ca3c.png)  
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/3ae8d815-eb8f-4741-b3ac-f21d265eeb68)  
 > 태양의 서커스에서 진행하는 라스베가스 3대쇼중 하나.  
 > 제일 유명한건 오쇼인데 일정상 불가능하여 카쇼로 결정  
 > [카쇼 블로그 클릭](https://blog.naver.com/ohshownet/223301003288)

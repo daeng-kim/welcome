@@ -175,9 +175,10 @@
 <br/>
 
 > ### 엔텔로프 캐년
-> ![image](https://github.com/daeng-kim/welcome/assets/76562946/eafdc0ca-936f-4d7d-a0db-67a854099fe3)  
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/edaac14a-6443-45ac-9c53-acaf6bb6b24f)  
 > 윈도우 바탕화면으로 엄청 유명한 협곡  
-> 미국 원주민이랑 무조건 같이 들어가야해서 투어예약 완.  
+> 미국 원주민이랑 무조건 같이 들어가야해서 투어예약 완. 
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/eafdc0ca-936f-4d7d-a0db-67a854099fe3)  
 > [관련 블로그 클릭](https://blog.naver.com/jewelry0822/223337428017)
 
 <br/>
@@ -193,7 +194,10 @@
 > ### 그랜드 캐년 뷰 포인트
 > 그랜드 캐년은 엄청나게 큰 협곡이고, 그 주위로 여러가지 뷰 포인트가 있다.  
 > 그 중에서 마더포인트가 가장 유명하고 웅장하다고 한다.  
-> [뷰 포인트 관련 블로그 클릭](https://blog.naver.com/skskdbzk/223246518301)
+> [뷰 포인트 관련 블로그 클릭](https://blog.naver.com/skskdbzk/223246518301)  
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/0008b3dd-450d-4d57-a63c-bbd1d5cf2061)  
+> 마더포인트
+
 <br/>
 
 ---

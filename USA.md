@@ -70,7 +70,7 @@
 </br>
 
 > ### 할리우드 공원 / 거리
-> ![image](https://github.com/daeng-kim/welcome/assets/76562946/8d55d429-be4f-46ef-a09b-bd6023ce924c)
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/8d55d429-be4f-46ef-a09b-bd6023ce924c)  
 > 할리우드공원 인증샷찍고 거리로 이동.  
 > 주차는 오베이션에 하면 될듯? - 35달러사면 2시간 2$  
 > 돌비극장 아이스크림 2개 먹으면 딱 된다고한다.  

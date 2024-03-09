@@ -66,25 +66,8 @@
   * 쇼핑 - 수프림 / 도버스트리트마켓
 * 06:00 PM NBA 경기 구경 (크립토닷컴아레나)
 * 숙소 복귀후 짐정리 (담날 일찍 떠납니다)
-
-
-
-> ### 크립토닷컴아레나
-> NBA 중 LA레이커스와 LA클리퍼스팀의 홈구장  
-> 우리가 볼 경기는 LA클리퍼스 VS 애틀란타 호크스  
-> ![image](https://github.com/daeng-kim/welcome/assets/76562946/85847d0b-f840-41c2-9a14-68030302c17d)
-> 
-> [관련 블로그 클릭](https://blog.naver.com/howshelives/223322037146)
-
-<br/>
-  
-> ### LACMA
-> LA에 있는 유명한 박물관인데, 굳이 안에 들어갈 필요는 없을것 같기도? 
-> ![image](https://github.com/daeng-kim/welcome/assets/76562946/44a5dfe2-bf2f-435f-a2f4-45132618bcb1)
-> 요 작품으로 유명해서 경기끝나고 잠깐 들러서 사진찍고 가도되고...
-
-
-<br/>
+ 
+</br>
 
 > ### 할리우드 공원 / 거리
 > ![image](https://github.com/daeng-kim/welcome/assets/76562946/8d55d429-be4f-46ef-a09b-bd6023ce924c)
@@ -96,6 +79,21 @@
 > 안성기 이병헌등 한국배우 싸인 손도장보고  
 > LA LA 랜드에서 기념품도 사고..  
 > [참고URL 클릭](https://blog.naver.com/bk930626/223330694433)
+
+<br/>
+
+> ### 크립토닷컴아레나
+> NBA 중 LA레이커스와 LA클리퍼스팀의 홈구장  
+> 우리가 볼 경기는 LA클리퍼스 VS 애틀란타 호크스  
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/85847d0b-f840-41c2-9a14-68030302c17d)
+> [관련 블로그 클릭](https://blog.naver.com/howshelives/223322037146)
+
+<br/>
+  
+> ### LACMA
+> LA에 있는 유명한 박물관인데, 굳이 안에 들어갈 필요는 없을것 같기도? 
+> ![image](https://github.com/daeng-kim/welcome/assets/76562946/44a5dfe2-bf2f-435f-a2f4-45132618bcb1)
+> 요 작품으로 유명해서 경기끝나고 잠깐 들러서 사진찍고 가도되고...
 <br/>
 
 ---

@@ -134,6 +134,7 @@
 
 ### DAY 4 (3/19) - 쉬어가는 날
 
+* ![image](https://github.com/daeng-kim/welcome/assets/76562946/11fe6cd0-8074-4d17-849c-24dfa279da52)  
 * 전 일정 라스베가스
 * 유일하게 살짝 늦잠자도 되는날.
 * 라스베가스 호텔투어

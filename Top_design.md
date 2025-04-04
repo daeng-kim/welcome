@@ -1,8 +1,9 @@
 # 탑 디자인 목조주택
 
 ## 도면
-![New Document 2025-03-30 192919 20250331_064609_0001](https://github.com/user-attachments/assets/89b6e0f8-9d7d-48af-9533-14cf83e621d4)
-![Clipped_image_20250404_154531](https://github.com/user-attachments/assets/772e40bb-cfb2-435d-8f85-a53329e4db4b)
+![New Document 2025-03-30 192919 20250331_064609_0001](https://github.com/user-attachments/assets/19b13233-017d-4f31-b7f8-197b4973f6fb)
+
+![New Document 2025-03-30 192919 20250331_064609_0002](https://github.com/user-attachments/assets/08fb9ca5-1f95-4370-94ab-409263c552ee)
 
 
 ## 외부

@@ -69,6 +69,7 @@
  
 
 ### 음식물 쓰레기
+![20251221_102958](https://github.com/user-attachments/assets/10700733-83f3-4358-b8ba-61ecd3b499e3)
 * 싱크대 아래 문을 여시면 음식물 건조 처리기가 있습니다.
 * 싱크대 사용 후 ✅**하수구 거름망까지 확실히 청소**하시고, 음식물을 처리기로 건조시켜 주세요.
 * 건조된 음식물은 일반 쓰레기봉투에 넣어서 버리시면 됩니다.
@@ -82,7 +83,12 @@
 
 ## 기기 사용법
 
+### 조명
+![20251004_203016(1)](https://github.com/user-attachments/assets/917132eb-bf31-471a-a8d4-0d9bd41b34f7)
+* 조명 스위치는 위와 같습니다.
+
 ### 실링팬 
+![20251004_203004(1)](https://github.com/user-attachments/assets/36062a7e-96c2-44a8-b28a-ef7f00fdf3ee)
 * 조명스위치들 중 맨좌측 하단의 버튼은 ON 합니다.
 * 실링팬 리모컨의 중앙 전원버튼을 켭니다. +, - 버튼을 이용하여 속도를 조절합니다.
 * 중앙 하단의 버튼은 실링팬의 조명 버튼입니다. 별장이 전체적으로 조명이 약하므로, 필요시 사용하세요.
@@ -111,6 +117,7 @@
 * 상단 조그다이얼을 돌려서 소리 크기를 조절합니다.
 
 ### 노래방 (더씽 M200) 🎤
+![20251221_102945(1)](https://github.com/user-attachments/assets/8a75e4d1-fb00-435a-9bc3-446dde398422)
 * 노래방 스피커의 전원(사진의 맨 상단 버튼)을 켭니다.
 * 마이크(더 큰 마이크)의 전원을 꾹 눌러서 켭니다.
 * 자동으로 연결됩니다.
@@ -127,12 +134,12 @@
 ![20251221_102945](https://github.com/user-attachments/assets/0ba4ecc6-2281-473c-be5a-f106bf62d1fa)
 ![20251221_102958](https://github.com/user-attachments/assets/171e779b-ac0e-4e17-ab29-4357f8096145)
 
-![20251004_203016(1)](https://github.com/user-attachments/assets/917132eb-bf31-471a-a8d4-0d9bd41b34f7)
-![20251004_203004(1)](https://github.com/user-attachments/assets/36062a7e-96c2-44a8-b28a-ef7f00fdf3ee)
-![20251221_102945(1)](https://github.com/user-attachments/assets/8a75e4d1-fb00-435a-9bc3-446dde398422)
 
 
-![20251221_102958](https://github.com/user-attachments/assets/10700733-83f3-4358-b8ba-61ecd3b499e3)
+
+
+
+
 
 
 

@@ -123,3 +123,7 @@
 
 
 ![20251221_102958](https://github.com/user-attachments/assets/10700733-83f3-4358-b8ba-61ecd3b499e3)
+
+
+<img width="992" height="576" alt="보일러" src="https://github.com/user-attachments/assets/2f20d4f6-685a-4b5e-831c-6cc42b3bb07c" />
+<img width="1492" height="532" alt="전기판넬" src="https://github.com/user-attachments/assets/1dfbec76-dee2-4c68-832a-7f3576158584" />

@@ -33,11 +33,13 @@
 > 열이 많이 올라서 화실 내부의 그을음마저 타버린 뒤에는 굵은 장작을 한개씩 넣으면 오래 탑니다.
 > 다 쓰시고 남은 재등은 그대로 두시고 퇴실해주세요.
 ### 2. 보일러
+<img width="992" height="576" alt="보일러" src="https://github.com/user-attachments/assets/2f20d4f6-685a-4b5e-831c-6cc42b3bb07c" />
 > 보일러는 난방을 누르면 우측에 설정 온도가 뜹니다. 설정 온도를 현재 온도보다 높이면 난방이 됩니다.    
 > 난방을 한번 더 누르면 현재온도만 나오게 되면서 보일러가 멈춥니다. 퇴실 할 때에는 이 상태로 두고 퇴실하시면 됩니다.  
 > 난방을 길게 누르면 `OF` 가 뜨면서 보일러가 완전히 꺼집니다. 2층에서 주무실 때 고주파음이 들리시면 `OF`상태로 끄시면 고주파음이 멈춥니다
 > #### 퇴실하실 때에는 현재온도가 나오는 상태로 두고 떠나주세요. 동파 방지모드가 작동되어야 합니다.
 ### 3. 전기판넬 (2층)
+<img width="1492" height="532" alt="전기판넬" src="https://github.com/user-attachments/assets/1dfbec76-dee2-4c68-832a-7f3576158584" />
 > 전기판넬의 왼쪽, 오른쪽의 버튼의 위치는 아래의 사진의 바닥을 난방합니다.  
 > 온도를 너무 높이면 엄청나게 더워질 수 있으니, 낮은 온도로 설정하고 전기장판을 사용하시면 됩니다.
 > 참고로 저희 부부는 더워서 전기판넬을 사용하지 않고, 전기장판만 사용합니다.
@@ -125,5 +127,5 @@
 ![20251221_102958](https://github.com/user-attachments/assets/10700733-83f3-4358-b8ba-61ecd3b499e3)
 
 
-<img width="992" height="576" alt="보일러" src="https://github.com/user-attachments/assets/2f20d4f6-685a-4b5e-831c-6cc42b3bb07c" />
-<img width="1492" height="532" alt="전기판넬" src="https://github.com/user-attachments/assets/1dfbec76-dee2-4c68-832a-7f3576158584" />
+
+

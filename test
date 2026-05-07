@@ -1,0 +1,104 @@
+<template>
+  <div ref="gridDiv" style="width: 100%; height: 600px;" />
+</template>
+
+<script setup>
+import { onMounted, ref } from 'vue'
+
+const gridDiv = ref(null)
+let gridView = null
+let dataProvider = null
+
+// QUAL_TYPE 목록 (고정하거나 데이터에서 동적으로 추출)
+const QUAL_TYPES = [
+  'BEVEL_AVG_CDT', 'BEVEL_AVG_CPM', 'BEVEL_MAX_CDT', 'BEVEL_MAX_CPM',
+  'BEVEL_MIN_CDT', 'BEVEL_MIN_CPM',
+  // ... 나머지 항목들
+]
+
+function transformData(rows) {
+  const map = new Map()
+
+  rows.forEach(row => {
+    const key = [
+      row.productCode, row.thickness, row.prodGrade,
+      row.makeSite, row.lineCode, row.lotNo,
+      row.wrapslipNo, row.palletNo, row.inDate, row.deliveryDate
+    ].join('||')
+
+    if (!map.has(key)) {
+      map.set(key, {
+        productCode:  row.productCode,
+        thickness:    row.thickness,
+        prodGrade:    row.prodGrade,
+        makeSite:     row.makeSite,
+        lineCode:     row.lineCode,
+        lotNo:        row.lotNo,
+        wrapslipNo:   row.wrapslipNo,
+        palletNo:     row.palletNo,
+        inDate:       row.inDate,
+        deliveryDate: row.deliveryDate
+      })
+    }
+    map.get(key)[row.qualType] = row.qualValue
+  })
+
+  return Array.from(map.values())
+}
+
+onMounted(async () => {
+  RealGridJS.setRootContext('/realgrid/scripts')
+
+  dataProvider = new RealGridJS.LocalDataProvider()
+  gridView = new RealGridJS.GridView(gridDiv.value)
+  gridView.setDataSource(dataProvider)
+
+  // 원본 JSON 로드 후 변환
+  const res = await fetch('/pivot_data.json')
+  const rawData = await res.json()
+
+  // QUAL_TYPE 목록 동적 추출
+  const qualTypes = [...new Set(rawData.map(r => r.qualType))].sort()
+
+  // 필드 정의
+  const fields = [
+    { fieldName: 'productCode' },
+    { fieldName: 'thickness',    dataType: 'number' },
+    { fieldName: 'prodGrade' },
+    { fieldName: 'makeSite' },
+    { fieldName: 'lineCode' },
+    { fieldName: 'lotNo' },
+    { fieldName: 'wrapslipNo' },
+    { fieldName: 'palletNo' },
+    { fieldName: 'inDate' },
+    { fieldName: 'deliveryDate' },
+    ...qualTypes.map(qt => ({ fieldName: qt, dataType: 'number' }))
+  ]
+  dataProvider.setFields(fields)
+
+  // 컬럼 정의
+  const columns = [
+    { fieldName: 'productCode',  header: { text: '제품코드' },  width: 100 },
+    { fieldName: 'thickness',    header: { text: '두께' },      width: 60 },
+    { fieldName: 'prodGrade',    header: { text: '등급' },      width: 80 },
+    { fieldName: 'makeSite',     header: { text: '제조SITE' },  width: 100 },
+    { fieldName: 'lineCode',     header: { text: '라인' },      width: 60 },
+    { fieldName: 'lotNo',        header: { text: 'LOT_NO' },    width: 120 },
+    { fieldName: 'wrapslipNo',   header: { text: 'W/S No' },    width: 130 },
+    { fieldName: 'palletNo',     header: { text: 'Pallet No' }, width: 110 },
+    { fieldName: 'inDate',       header: { text: '입고일' },    width: 80 },
+    { fieldName: 'deliveryDate', header: { text: '출하일' },    width: 80 },
+    ...qualTypes.map(qt => ({
+      fieldName: qt,
+      header: { text: qt },
+      width: 110,
+      styles: { numberFormat: '#,##0.###', textAlignment: 'far' }
+    }))
+  ]
+  gridView.setColumns(columns)
+
+  // 데이터 변환 후 주입
+  const widedData = transformData(rawData)
+  dataProvider.fillJsonData(widedData)
+})
+</script>

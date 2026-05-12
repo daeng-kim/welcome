@@ -1,0 +1,110 @@
+<template>
+  <div ref="plotEl" class="chart" />
+</template>
+
+<script setup>
+import Plotly from 'plotly.js-dist-min'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
+
+const props = defineProps({
+  data: {
+    type: Object,
+    required: true
+    // { x_axis: [], y_axis: [], data: [[x, y, z], ...] }
+  }
+})
+
+const plotEl = ref(null)
+
+// [x, y, z] 배열 → Plotly가 요구하는 2D z 행렬로 변환
+function toZMatrix(xAxis, yAxis, flatData) {
+  // z[yi][xi] 형태의 2D 배열 생성
+  const zMatrix = yAxis.map(() => new Array(xAxis.length).fill(null))
+
+  const xIndex = Object.fromEntries(xAxis.map((v, i) => [v, i]))
+  const yIndex = Object.fromEntries(yAxis.map((v, i) => [v, i]))
+
+  flatData.forEach(([x, y, z]) => {
+    const xi = xIndex[x]
+    const yi = yIndex[y]
+    if (xi !== undefined && yi !== undefined) {
+      zMatrix[yi][xi] = z
+    }
+  })
+  return zMatrix
+}
+
+function draw() {
+  if (!plotEl.value || !props.data) return
+
+  const { x_axis, y_axis, data } = props.data
+  const zMatrix = toZMatrix(x_axis, y_axis, data)
+
+  const trace = {
+    type: 'contour',
+    x: x_axis,
+    y: y_axis,
+    z: zMatrix,
+
+    // 등고선 스타일
+    colorscale: 'Viridis',  // 'Jet', 'RdBu', 'Hot' 등 변경 가능
+    contours: {
+      coloring: 'heatmap',  // 'lines'(선만), 'heatmap'(색채움+선), 'fill'(면채움)
+      showlabels: true,     // 등고선 값 라벨 표시
+      labelfont: { size: 10, color: 'white' },
+      start: 0,             // 등고선 시작값 (ST_VALUE min)
+      end: 1,               // 등고선 끝값 (ST_VALUE max)
+      size: 0.1,            // 등고선 간격
+    },
+
+    // 색상 범위
+    zmin: 0,
+    zmax: 1,
+
+    // 컬러바
+    colorbar: {
+      title: 'ST_VALUE',
+      thickness: 20,
+    },
+
+    // 등고선 선 스타일
+    line: {
+      smoothing: 1.3,   // 선 부드러움 (0~1.3)
+      width: 1,
+    },
+  }
+
+  const layout = {
+    title: '등고선 차트',
+    xaxis: { title: 'X', autorange: true },
+    yaxis: { title: 'Y', autorange: true },
+    margin: { t: 50, r: 50, b: 50, l: 60 },
+  }
+
+  const config = {
+    responsive: true,
+    displayModeBar: true,   // 툴바 표시 (zoom, pan 등)
+    scrollZoom: true,       // 마우스 휠 줌
+  }
+
+  Plotly.newPlot(plotEl.value, [trace], layout, config)
+}
+
+onMounted(() => draw())
+watch(() => props.data, () => draw(), { deep: true })
+
+// 창 크기 변경 시 리사이즈
+const onResize = () => Plotly.Plots.resize(plotEl.value)
+onMounted(() => window.addEventListener('resize', onResize))
+onUnmounted(() => {
+  window.removeEventListener('resize', onResize)
+  Plotly.purge(plotEl.value)  // 메모리 해제
+})
+</script>
+
+<style scoped>
+.chart {
+  width: 100%;
+  height: 600px;
+}
+</style>

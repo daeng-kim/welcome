@@ -3,139 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <title>Daily Data Report</title>
-
 <!--
-  ※ 실제 사용 시 아래 경로를 RealGrid 라이선스/스크립트 실제 경로로 교체하세요.
+  실제 사용 시 아래 RealGrid 스크립트 경로를 맞춰주세요.
   <link rel="stylesheet" href="/realgrid/css/default_blue.css">
   <script src="/realgrid/realgridjs-lic.js"></script>
   <script src="/realgrid/realgridjs.min.js"></script>
   <script src="/realgrid/realgridjs-api.js"></script>
 -->
-
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Malgun Gothic','맑은 고딕',Arial,sans-serif; font-size:12px; background:#f0f0f0; color:#222; }
+.title-bar { background:#1e3a5f; color:#fff; padding:6px 14px; display:flex; align-items:center; justify-content:space-between; font-size:13px; font-weight:bold; }
+.title-bar .btn-group button { background:#e8e8e8; border:1px solid #aaa; border-radius:2px; padding:3px 10px; font-size:11px; cursor:pointer; margin-left:4px; }
+.filter-area { background:#f5f5f5; border:1px solid #ccc; margin:6px; padding:8px 12px; border-radius:2px; }
+.filter-row { display:flex; align-items:center; gap:10px; margin-bottom:5px; flex-wrap:wrap; }
+.filter-row:last-child { margin-bottom:0; }
+.filter-label { font-size:11px; color:#444; white-space:nowrap; font-weight:bold; }
+.filter-row input[type="text"], .filter-row select { height:22px; border:1px solid #aaa; border-radius:2px; padding:0 4px; font-size:11px; font-family:inherit; min-width:90px; }
+.radio-group { display:flex; flex-direction:column; gap:2px; }
+.radio-group label { display:flex; align-items:center; gap:4px; font-size:11px; }
+.tab-area { margin:0 6px 4px; display:flex; gap:2px; }
+.tab-btn { background:#e0e0e0; border:1px solid #bbb; border-bottom:none; border-radius:3px 3px 0 0; padding:5px 18px; font-size:12px; cursor:pointer; font-family:inherit; color:#555; }
+.tab-btn.active { background:#fff; color:#1e3a5f; font-weight:bold; border-color:#999; }
+.grid-wrap { margin:0 6px 6px; border:1px solid #999; background:#fff; }
+#realgridDiv { width:100%; height:calc(100vh - 222px); min-height:400px; }
 
-  body {
-    font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
-    font-size: 12px;
-    background: #f0f0f0;
-    color: #222;
-  }
-
-  /* ── 상단 타이틀바 ── */
-  .title-bar {
-    background: #1e3a5f;
-    color: #fff;
-    padding: 6px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: bold;
-  }
-  .title-bar .btn-group button {
-    background: #e8e8e8;
-    border: 1px solid #aaa;
-    border-radius: 2px;
-    padding: 3px 10px;
-    font-size: 11px;
-    cursor: pointer;
-    margin-left: 4px;
-  }
-
-  /* ── 검색 필터 영역 ── */
-  .filter-area {
-    background: #f5f5f5;
-    border: 1px solid #ccc;
-    margin: 6px;
-    padding: 8px 12px;
-    border-radius: 2px;
-  }
-  .filter-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
-    flex-wrap: wrap;
-  }
-  .filter-row:last-child { margin-bottom: 0; }
-  .filter-label {
-    font-size: 11px;
-    color: #444;
-    white-space: nowrap;
-    font-weight: bold;
-  }
-  .filter-row input[type="text"],
-  .filter-row select {
-    height: 22px;
-    border: 1px solid #aaa;
-    border-radius: 2px;
-    padding: 0 4px;
-    font-size: 11px;
-    font-family: inherit;
-    min-width: 90px;
-  }
-  .radio-group { display: flex; flex-direction: column; gap: 2px; }
-  .radio-group label { display: flex; align-items: center; gap: 4px; font-size: 11px; }
-
-  /* ── 탭 ── */
-  .tab-area {
-    margin: 0 6px 4px;
-    display: flex;
-    gap: 2px;
-  }
-  .tab-btn {
-    background: #e0e0e0;
-    border: 1px solid #bbb;
-    border-bottom: none;
-    border-radius: 3px 3px 0 0;
-    padding: 5px 18px;
-    font-size: 12px;
-    cursor: pointer;
-    font-family: inherit;
-    color: #555;
-  }
-  .tab-btn.active {
-    background: #fff;
-    color: #1e3a5f;
-    font-weight: bold;
-    border-color: #999;
-  }
-
-  /* ── 그리드 컨테이너 ── */
-  .grid-wrap {
-    margin: 0 6px 6px;
-    border: 1px solid #999;
-    background: #fff;
-  }
-  #realgridDiv {
-    width: 100%;
-    height: calc(100vh - 220px);
-    min-height: 400px;
-  }
-
-  /* ── ColorType 별 행 스타일 (RealGrid styleCallback 대신 CSS로 미리 정의) ── */
-  /*
-    A = 굵은 헤더 (양품률, 시간가동률 등) - 배경 약간 어둡게
-    B = 서브헤더 (Melting, FDM, BOD, Summary 등) - 중간 배경
-    C = 일반 행
-    D = 들여쓰기 행 (- Inline, -Offline 등)
-  */
+/* 폴백 테이블 */
+.fb-wrap { width:100%; height:calc(100vh - 222px); overflow:auto; }
+.fb-table { border-collapse:collapse; font-size:11px; width:max-content; }
+.fb-table th { background:#2c4a70; color:#fff; border:1px solid #4a7ab5; padding:4px 6px; text-align:center; white-space:nowrap; position:sticky; top:0; z-index:10; }
+.fb-table th.sticky-0 { position:sticky; top:0; left:0;   z-index:20; width:28px; }
+.fb-table th.sticky-1 { position:sticky; top:0; left:28px; z-index:20; min-width:185px; }
+.fb-table th.sticky-2 { position:sticky; top:0; left:213px;z-index:20; width:58px; }
+.fb-table td { border:1px solid #ddd; padding:2px 6px; white-space:nowrap; }
+.fb-table td.sticky-0 { position:sticky; left:0;   z-index:5; text-align:center; cursor:pointer; width:28px; }
+.fb-table td.sticky-1 { position:sticky; left:28px; z-index:5; min-width:185px; overflow:hidden; text-overflow:ellipsis; }
+.fb-table td.sticky-2 { position:sticky; left:213px;z-index:5; text-align:center; font-size:10px; width:58px; }
+.fb-table td.val-cell { text-align:right; min-width:115px; }
+.row-A { background:#dce6f1 !important; font-weight:bold; color:#1e3a5f; }
+.row-B { background:#e8eef6 !important; font-weight:bold; color:#2c4a70; }
+.row-C { background:#ffffff !important; color:#222; }
+.row-D { background:#fafafa !important; color:#666; }
+#loadingMsg { padding:30px; font-size:14px; color:#666; text-align:center; }
 </style>
 </head>
 <body>
 
-<!-- 타이틀 -->
 <div class="title-bar">
   <span>⬛ Daily Data Report(MB_B01_daily_data_report)</span>
-  <div class="btn-group">
-    <button>조회</button>
-    <button>내려받기</button>
-    <button>닫기</button>
-  </div>
+  <div class="btn-group"><button>조회</button><button>내려받기</button><button>닫기</button></div>
 </div>
 
-<!-- 검색 필터 -->
 <div class="filter-area">
   <div class="filter-row">
     <div class="radio-group">
@@ -144,425 +62,288 @@
       <label><input type="radio" name="mode"> Offline</label>
     </div>
     <span class="filter-label">조회기간</span>
+    <input type="text" value="2026/05/11" style="width:90px"> ~
     <input type="text" value="2026/05/11" style="width:90px">
-    <span>~</span>
-    <input type="text" value="2026/05/11" style="width:90px">
-    <span class="filter-label">Tank</span>
-    <select><option>전체</option></select>
-    <span class="filter-label">Gen</span>
-    <select><option>전체</option></select>
-    <span class="filter-label">단위</span>
-    <select><option>SQFT/%</option></select>
-    <span class="filter-label">양산구분</span>
-    <select><option>양산</option></select>
+    <span class="filter-label">Tank</span><select><option>전체</option></select>
+    <span class="filter-label">Gen</span><select><option>전체</option></select>
+    <span class="filter-label">단위</span><select><option>SQFT/%</option></select>
+    <span class="filter-label">양산구분</span><select><option>양산</option></select>
   </div>
   <div class="filter-row">
-    <span class="filter-label" style="margin-left:50px">회사</span>
-    <select><option>전체</option></select>
-    <span class="filter-label" style="margin-left:20px">조성</span>
-    <select><option>전체</option></select>
-    <span class="filter-label" style="margin-left:20px">두께</span>
-    <select><option>전체</option></select>
+    <span class="filter-label" style="margin-left:54px">회사</span><select><option>전체</option></select>
+    <span class="filter-label">조성</span><select><option>전체</option></select>
+    <span class="filter-label">두께</span><select><option>전체</option></select>
   </div>
 </div>
 
-<!-- 탭 -->
 <div class="tab-area">
   <button class="tab-btn active">Tank 요약</button>
   <button class="tab-btn">Line 요약</button>
   <button class="tab-btn">재작업 요약</button>
 </div>
 
-<!-- 그리드 -->
 <div class="grid-wrap">
-  <div id="realgridDiv"></div>
+  <div id="realgridDiv"><div id="loadingMsg">⏳ raw_data.json 로딩 중...</div></div>
 </div>
 
 <script>
 // ================================================================
-// ① 데이터 정의
-//    실제 운영 시: fetch('/api/daily-data').then(res=>res.json()).then(data=>loadGrid(data))
-//    또는: fetch('grid_data.json').then(...) 로 JSON 파일 로드
+// 【그룹 표시 순서 - D열(GBN_LOSS_CODE) 기준】
+//
+// 양품률(A40)이 맨 앞에 오는 이유:
+//   Raw 데이터 자체에는 표시 순서 정보가 없습니다.
+//   GROUP_ORDER 맵에서 'A40'을 순서 1번으로 지정했기 때문입니다.
+//   이 순서는 화면 기획/비즈니스 로직에서 결정된 것이며,
+//   DB나 엑셀 원본에는 없는 정보입니다.
+//
+// 【E열(세부항목) 순서 - VIEW_SEQ 기준】
+//   같은 GBN_LOSS_CODE 그룹 내에서 VIEW_SEQ 오름차순으로 정렬됩니다.
+//   VIEW_SEQ = 0 인 행이 그룹의 헤더(대표값) 행입니다.
 // ================================================================
-
-// Tank 컬럼 목록 (합계 + Tank들)
-const TANK_COLS = [
-  '합계', 'KN01(SizeMix)', 'KN02(SizeMix)', 'KN04(G850)',
-  'KN06(SizeMix)', 'KN07(SizeMix)', 'KN09(SizeMix)', 'KN11(SizeMix)',
-  'KN12(G860)', 'KN13(SizeMix)', 'KN14(SizeMix)', 'KN15(SizeMix)',
-  'KN17(CBG2)', 'KN18(G800)'
-];
-
-// ================================================================
-// ② 그룹 순서 로직 설명
-//
-// D열(GBN_LOSS_CODE)의 그룹 순서는 데이터에서 직접 읽히는 순서가 아니라
-// 코드에 명시된 GROUP_ORDER로 결정됩니다:
-//
-//  A40  → 양품률       (C_CHK=1: 체크박스로 하위 행 접기/펼치기 가능)
-//  Z25  → 시간가동률   (C_CHK=1: 체크박스 있음)
-//  Z30  → 성능가동률   (C_CHK=1: 체크박스 있음)
-//  D10  → Melting 종합불량률【A】  (C_FLAG=1: 굵은 헤더)
-//  D11  → FDM 종합불량률【B】
-//  D12  → BOD 종합불량률【C】
-//  D17  → Sample 종합불량률【D】
-//  D101 → Forming 종합불량률【B+C+D】 (Summary)
-//  D20  → 용해성형G 종합불량률【A+B】  (Summary)
-//  D30  → 용해성형 종합불량률【A+B+C+D】(Summary)
-//  Z91~Z96 → BIDP (총 Flow 면적, Bead 면적, Bead Utilization 등)
-//  A10  → 조업률
-//  A20  → 설비종합효률 / 총 가동률
-//
-// "양품률이 맨 앞에 나오는 이유": 데이터 소스 자체에는 순서가 없고,
-// 그리드를 그릴 때 GROUP_ORDER 맵으로 정렬하기 때문입니다.
-// 데이터 DB에서는 A40 코드가 양품률 그룹이며, 표시 순서를 1번으로 지정한 것입니다.
-//
-// E열(REMARK/세부항목)은 C열(VIEW_SEQ) 오름차순으로 정렬됩니다.
-// VIEW_SEQ=0 인 행이 그룹 헤더(summary row)입니다.
-// ================================================================
-
 const GROUP_ORDER = {
-  'A40': 1, 'Z25': 2, 'Z30': 3,
-  'D10': 4, 'D11': 5, 'D12': 6, 'D17': 7,
-  'D101': 8, 'D20': 9, 'D30': 10,
-  'Z91': 11, 'Z92': 12, 'Z93': 13, 'Z94': 14, 'Z95': 15, 'Z96': 16,
-  'A10': 17, 'A20': 18,
+  'A40':  1,   // 양품률
+  'Z25':  2,   // 시간가동률
+  'Z30':  3,   // 성능가동률
+  'D10':  4,   // Melting 종합불량률【A】
+  'D11':  5,   // FDM 종합불량률【B】
+  'D12':  6,   // BOD 종합불량률【C】
+  'D17':  7,   // Sample 종합불량률【D】
+  'D101': 8,   // Forming 종합불량률【B+C+D】
+  'D20':  9,   // 용해성형G 종합불량률【A+B】
+  'D30':  10,  // 용해성형 종합불량률【A+B+C+D】
+  'Z91':  11,  'Z92': 12, 'Z93': 13,
+  'Z94':  14,  'Z95': 15, 'Z96': 16,
+  'A10':  17,  'A20': 18,
 };
 
-// ================================================================
-// ③ 샘플 데이터 (실제는 fetch로 교체)
-//    colorType: A=굵은 헤더(접기 가능), B=서브헤더, C=일반, D=들여쓰기
-//    cChk=1 → 해당 그룹 전체를 체크박스로 접기/펼치기
-//    cFlag=1 → 행 자체가 그룹 헤더
-// ================================================================
-const RAW_DATA = [
-  // ─── 양품률 그룹 (A40) ───────────────────────────────────────
-  {gbn:'A40',seq:0, title:'양품률',       unit:'%',     cFlag:'1',cChk:'1',color:'A', 합계:'90.53',   'KN01(SizeMix)':'93.92',  'KN02(SizeMix)':'97.13',  'KN04(G850)':'88.63',  'KN06(SizeMix)':'96.32',  'KN07(SizeMix)':'97.40',  'KN09(SizeMix)':'92.50',  'KN11(SizeMix)':'86.42',  'KN12(G860)':'91.93',  'KN13(SizeMix)':'54.84',  'KN14(SizeMix)':'93.70',  'KN15(SizeMix)':'97.26',  'KN17(CBG2)':'52.66',  'KN18(G800)':'100.00'},
-  {gbn:'A40',seq:1, title:'원판 생산가능수',unit:'pcs',  cFlag:'0',cChk:'0',color:'C', 합계:'64,468',  'KN01(SizeMix)':'4,076',  'KN02(SizeMix)':'2,882',  'KN04(G850)':'3,571',  'KN06(SizeMix)':'4,824',  'KN07(SizeMix)':'4,219',  'KN09(SizeMix)':'3,688',  'KN11(SizeMix)':'2,941',  'KN12(G860)':'4,895',  'KN13(SizeMix)':'2,549',  'KN14(SizeMix)':'3,974',  'KN15(SizeMix)':'4,059',  'KN17(CBG2)':'22,789', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:2, title:'양품수',       unit:'pcs',   cFlag:'0',cChk:'0',color:'C', 합계:'50,071',  'KN01(SizeMix)':'3,828',  'KN02(SizeMix)':'2,799',  'KN04(G850)':'3,165',  'KN06(SizeMix)':'4,647',  'KN07(SizeMix)':'4,109',  'KN09(SizeMix)':'3,411',  'KN11(SizeMix)':'2,542',  'KN12(G860)':'4,500',  'KN13(SizeMix)':'1,398',  'KN14(SizeMix)':'3,724',  'KN15(SizeMix)':'3,948',  'KN17(CBG2)':'12,000', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:3, title:'– Inline',    unit:'pcs',   cFlag:'0',cChk:'0',color:'D', 합계:'4,246',   'KN01(SizeMix)':'0',      'KN02(SizeMix)':'0',      'KN04(G850)':'0',      'KN06(SizeMix)':'1,204',  'KN07(SizeMix)':'0',      'KN09(SizeMix)':'961',    'KN11(SizeMix)':'148',    'KN12(G860)':'0',      'KN13(SizeMix)':'0',      'KN14(SizeMix)':'0',      'KN15(SizeMix)':'1,933',  'KN17(CBG2)':'0',      'KN18(G800)':'0'},
-  {gbn:'A40',seq:4, title:'– Offline',   unit:'pcs',   cFlag:'0',cChk:'0',color:'D', 합계:'45,825',  'KN01(SizeMix)':'3,828',  'KN02(SizeMix)':'2,799',  'KN04(G850)':'3,165',  'KN06(SizeMix)':'3,443',  'KN07(SizeMix)':'4,109',  'KN09(SizeMix)':'2,450',  'KN11(SizeMix)':'2,394',  'KN12(G860)':'4,500',  'KN13(SizeMix)':'1,398',  'KN14(SizeMix)':'3,724',  'KN15(SizeMix)':'2,015',  'KN17(CBG2)':'12,000', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:5, title:'입고 양품률',  unit:'%',     cFlag:'0',cChk:'0',color:'C', 합계:'72.02',   'KN01(SizeMix)':'9.63',   'KN02(SizeMix)':'99.25',  'KN04(G850)':'84.01',  'KN06(SizeMix)':'100.71', 'KN07(SizeMix)':'97.64',  'KN09(SizeMix)':'30.13',  'KN11(SizeMix)':'76.42',  'KN12(G860)':'95.61',  'KN13(SizeMix)':'7.53',   'KN14(SizeMix)':'73.59',  'KN15(SizeMix)':'99.35',  'KN17(CBG2)':'50.90',  'KN18(G800)':'0.00'},
-  {gbn:'A40',seq:6, title:'원판 불량수',  unit:'pcs',   cFlag:'0',cChk:'0',color:'C', 합계:'14,397',  'KN01(SizeMix)':'248',    'KN02(SizeMix)':'83',     'KN04(G850)':'406',    'KN06(SizeMix)':'177',    'KN07(SizeMix)':'110',    'KN09(SizeMix)':'277',    'KN11(SizeMix)':'399',    'KN12(G860)':'395',    'KN13(SizeMix)':'1,151',  'KN14(SizeMix)':'250',    'KN15(SizeMix)':'111',    'KN17(CBG2)':'10,789', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:7, title:'원판 생산가능면적',unit:'ft²',cFlag:'0',cChk:'0',color:'C',합계:'2,724,857','KN01(SizeMix)':'271,456', 'KN02(SizeMix)':'170,693','KN04(G850)':'222,792', 'KN06(SizeMix)':'306,658','KN07(SizeMix)':'265,192','KN09(SizeMix)':'241,024','KN11(SizeMix)':'183,513','KN12(G860)':'319,930','KN13(SizeMix)':'165,986','KN14(SizeMix)':'258,781','KN15(SizeMix)':'264,298','KN17(CBG2)':'54,534', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:8, title:'원판 생산면적',  unit:'ft²', cFlag:'0',cChk:'0',color:'C', 합계:'2,466,781','KN01(SizeMix)':'254,952','KN02(SizeMix)':'165,793','KN04(G850)':'197,458','KN06(SizeMix)':'295,364','KN07(SizeMix)':'258,304','KN09(SizeMix)':'222,936','KN11(SizeMix)':'158,590','KN12(G860)':'294,111','KN13(SizeMix)':'91,025', 'KN14(SizeMix)':'242,473','KN15(SizeMix)':'257,058','KN17(CBG2)':'28,716', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:9, title:'–Inline',     unit:'ft²',   cFlag:'0',cChk:'0',color:'D', 합계:'273,017', 'KN01(SizeMix)':'0',      'KN02(SizeMix)':'0',      'KN04(G850)':'0',      'KN06(SizeMix)':'75,115', 'KN07(SizeMix)':'0',      'KN09(SizeMix)':'62,809', 'KN11(SizeMix)':'9,233',  'KN12(G860)':'0',      'KN13(SizeMix)':'0',      'KN14(SizeMix)':'0',      'KN15(SizeMix)':'125,860','KN17(CBG2)':'0',      'KN18(G800)':'0'},
-  {gbn:'A40',seq:10,title:'–Offline',    unit:'ft²',   cFlag:'0',cChk:'0',color:'D', 합계:'2,193,764','KN01(SizeMix)':'254,952','KN02(SizeMix)':'165,793','KN04(G850)':'197,458','KN06(SizeMix)':'220,249','KN07(SizeMix)':'258,304','KN09(SizeMix)':'160,127','KN11(SizeMix)':'149,357','KN12(G860)':'294,111','KN13(SizeMix)':'91,025', 'KN14(SizeMix)':'242,473','KN15(SizeMix)':'131,198','KN17(CBG2)':'28,716', 'KN18(G800)':'0'},
-  {gbn:'A40',seq:11,title:'원판 불량면적', unit:'ft²',  cFlag:'0',cChk:'0',color:'C', 합계:'258,076', 'KN01(SizeMix)':'16,504', 'KN02(SizeMix)':'4,900',  'KN04(G850)':'25,334', 'KN06(SizeMix)':'11,294', 'KN07(SizeMix)':'6,888',  'KN09(SizeMix)':'18,088', 'KN11(SizeMix)':'24,923', 'KN12(G860)':'25,819', 'KN13(SizeMix)':'74,961', 'KN14(SizeMix)':'16,308', 'KN15(SizeMix)':'7,240',  'KN17(CBG2)':'25,818', 'KN18(G800)':'0'},
-  // ─── 불량률 Summary (D→ D20, D30, D101) ──────────────────────
-  {gbn:'D10',seq:0, title:'Melting 종합불량률【A】',unit:'sqft/%',cFlag:'1',cChk:'0',color:'B',합계:'207,404  7.61','KN01(SizeMix)':'13,985  5.15','KN02(SizeMix)':'3,672  2.15','KN04(G850)':'24,518  11.01','KN06(SizeMix)':'6,765  2.21','KN07(SizeMix)':'3,152  1.19','KN09(SizeMix)':'14,575  6.05','KN11(SizeMix)':'23,146  1','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  {gbn:'D101',seq:0,title:'Forming 종합불량률【B+C+D】',unit:'sqft/%',cFlag:'0',cChk:'0',color:'A',합계:'50,672  1.86','KN01(SizeMix)':'2,519  0.93','KN02(SizeMix)':'1,227  0.72','KN04(G850)':'816  0.37','KN06(SizeMix)':'4,529  1.48','KN07(SizeMix)':'3,736  1.41','KN09(SizeMix)':'3,513  1.46','KN11(SizeMix)':'1,777  0','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  {gbn:'D11',seq:0, title:'FDM 종합불량률【B】',unit:'sqft/%',cFlag:'1',cChk:'0',color:'B',합계:'26,059  0.96','KN01(SizeMix)':'133  0.05','KN02(SizeMix)':'592  0.35','KN04(G850)':'0  0.00','KN06(SizeMix)':'315  0.10','KN07(SizeMix)':'749  0.28','KN09(SizeMix)':'65  0.03','KN11(SizeMix)':'62  0','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  {gbn:'D12',seq:0, title:'BOD 종합불량률【C】',unit:'sqft/%',cFlag:'1',cChk:'0',color:'B',합계:'20,656  0.76','KN01(SizeMix)':'1,920  0.71','KN02(SizeMix)':'339  0.20','KN04(G850)':'504  0.23','KN06(SizeMix)':'3,653  1.19','KN07(SizeMix)':'2,550  0.96','KN09(SizeMix)':'3,056  1.27','KN11(SizeMix)':'1,527  0','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  {gbn:'D17',seq:0, title:'Sample 종합불량률【D】',unit:'sqft/%',cFlag:'1',cChk:'0',color:'B',합계:'3,957  0.15','KN01(SizeMix)':'466  0.17','KN02(SizeMix)':'296  0.17','KN04(G850)':'312  0.14','KN06(SizeMix)':'561  0.18','KN07(SizeMix)':'437  0.16','KN09(SizeMix)':'392  0.16','KN11(SizeMix)':'187  0','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  {gbn:'D20',seq:0, title:'용해성형G 종합불량률【A+B】',unit:'sqft/%',cFlag:'0',cChk:'0',color:'A',합계:'233,463  8.57','KN01(SizeMix)':'14,118  5.20','KN02(SizeMix)':'4,265  2.50','KN04(G850)':'24,518  11.01','KN06(SizeMix)':'7,079  2.31','KN07(SizeMix)':'3,901  1.47','KN09(SizeMix)':'14,640  6.07','KN11(SizeMix)':'23,208  1','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  {gbn:'D30',seq:0, title:'용해성형 종합불량률【A+B+C+D】',unit:'sqft/%',cFlag:'0',cChk:'0',color:'A',합계:'258,076  9.47','KN01(SizeMix)':'16,504  6.08','KN02(SizeMix)':'4,900  2.87','KN04(G850)':'25,334  11.37','KN06(SizeMix)':'11,294  3.68','KN07(SizeMix)':'6,888  2.60','KN09(SizeMix)':'18,088  7.50','KN11(SizeMix)':'24,923  1','KN12(G860)':'','KN13(SizeMix)':'','KN14(SizeMix)':'','KN15(SizeMix)':'','KN17(CBG2)':'','KN18(G800)':''},
-  // ─── 시간가동률 (Z25) ─────────────────────────────────────────
-  {gbn:'Z25',seq:0, title:'시간가동률',   unit:'%',     cFlag:'1',cChk:'1',color:'A', 합계:'99.08', 'KN01(SizeMix)':'99.66',  'KN02(SizeMix)':'100.00', 'KN04(G850)':'100.00', 'KN06(SizeMix)':'99.31',  'KN07(SizeMix)':'99.79',  'KN09(SizeMix)':'95.89',  'KN11(SizeMix)':'99',     'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z25',seq:1, title:'총보유시간',   unit:'hr',    cFlag:'0',cChk:'0',color:'C', 합계:'287.01','KN01(SizeMix)':'24.00',  'KN02(SizeMix)':'24.00',  'KN04(G850)':'24.00',  'KN06(SizeMix)':'24.00',  'KN07(SizeMix)':'24.00',  'KN09(SizeMix)':'24.00',  'KN11(SizeMix)':'',       'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z25',seq:2, title:'계획가동시간', unit:'hr',    cFlag:'0',cChk:'0',color:'C', 합계:'287.01','KN01(SizeMix)':'24.00',  'KN02(SizeMix)':'24.00',  'KN04(G850)':'24.00',  'KN06(SizeMix)':'24.00',  'KN07(SizeMix)':'24.00',  'KN09(SizeMix)':'24.00',  'KN11(SizeMix)':'',       'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z25',seq:5, title:'공정운영 D/T', unit:'hr',   cFlag:'0',cChk:'0',color:'C', 합계:'2.64',  'KN01(SizeMix)':'0.08',   'KN02(SizeMix)':'0.00',   'KN04(G850)':'0.00',   'KN06(SizeMix)':'0.17',   'KN07(SizeMix)':'0.05',   'KN09(SizeMix)':'0.99',   'KN11(SizeMix)':'',       'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z25',seq:6, title:'실가동시간',   unit:'hr',    cFlag:'0',cChk:'0',color:'C', 합계:'284.37','KN01(SizeMix)':'23.92',  'KN02(SizeMix)':'24.00',  'KN04(G850)':'24.00',  'KN06(SizeMix)':'23.83',  'KN07(SizeMix)':'23.95',  'KN09(SizeMix)':'23.01',  'KN11(SizeMix)':'',       'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  // ─── 성능가동률 (Z30) ─────────────────────────────────────────
-  {gbn:'Z30',seq:0, title:'성능가동률',   unit:'%',     cFlag:'1',cChk:'1',color:'A', 합계:'92.70', 'KN01(SizeMix)':'95.31',  'KN02(SizeMix)':'95.05',  'KN04(G850)':'95.06',  'KN06(SizeMix)':'91.82',  'KN07(SizeMix)':'94.96',  'KN09(SizeMix)':'94.86',  'KN11(SizeMix)':'89',     'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z30',seq:1, title:'Flow Rate',   unit:'Lb/hr', cFlag:'0',cChk:'0',color:'C', 합계:'2,736.70','KN01(SizeMix)':'3,260.68','KN02(SizeMix)':'3,052.06','KN04(G850)':'3,002.12','KN06(SizeMix)':'2,948.22','KN07(SizeMix)':'3,248.62','KN09(SizeMix)':'3,145.56','KN11(SizeMix)':'2,4',   'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z30',seq:2, title:'PR Speed',    unit:'ipm',   cFlag:'0',cChk:'0',color:'C', 합계:'283.43','KN01(SizeMix)':'296.19',  'KN02(SizeMix)':'196.18',  'KN04(G850)':'246.04',  'KN06(SizeMix)':'341.02',  'KN07(SizeMix)':'293.49',  'KN09(SizeMix)':'277.59',  'KN11(SizeMix)':'21',     'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z30',seq:3, title:'Cycle Time',  unit:'sec',   cFlag:'0',cChk:'0',color:'C', 합계:'22.71', 'KN01(SizeMix)':'21.09',  'KN02(SizeMix)':'29.98',  'KN04(G850)':'24.20',  'KN06(SizeMix)':'17.86',  'KN07(SizeMix)':'20.43',  'KN09(SizeMix)':'22.46',  'KN11(SizeMix)':'2',      'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z30',seq:4, title:'생산속도',    unit:'pcs/hr',cFlag:'0',cChk:'0',color:'C', 합계:'226.71','KN01(SizeMix)':'170.41',  'KN02(SizeMix)':'120.07',  'KN04(G850)':'148.79',  'KN06(SizeMix)':'202.42',  'KN07(SizeMix)':'176.16',  'KN09(SizeMix)':'160.24',  'KN11(SizeMix)':'1',      'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z30',seq:5, title:'생산속도(면적)',unit:'f²/hr',cFlag:'0',cChk:'0',color:'C', 합계:'9,582', 'KN01(SizeMix)':'11,349', 'KN02(SizeMix)':'7,112',  'KN04(G850)':'9,283',  'KN06(SizeMix)':'12,867', 'KN07(SizeMix)':'11,073', 'KN09(SizeMix)':'10,473', 'KN11(SizeMix)':'',       'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  // ─── BIDP (Z91~Z96) ──────────────────────────────────────────
-  {gbn:'Z91',seq:0, title:'총 Flow 면적',unit:'ft²',   cFlag:'0',cChk:'0',color:'B', 합계:'3,339,877','KN01(SizeMix)':'320,591','KN02(SizeMix)':'214,400','KN04(G850)':'278,755','KN06(SizeMix)':'370,908','KN07(SizeMix)':'320,385','KN09(SizeMix)':'305,812','KN11(SizeMix)':'219',   'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z92',seq:0, title:'Bead 면적',   unit:'ft²',   cFlag:'0',cChk:'0',color:'B', 합계:'615,958','KN01(SizeMix)':'49,134', 'KN02(SizeMix)':'43,707', 'KN04(G850)':'55,963', 'KN06(SizeMix)':'64,250', 'KN07(SizeMix)':'55,193', 'KN09(SizeMix)':'64,788', 'KN11(SizeMix)':'37',    'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z93',seq:0, title:'Bead Utilization',unit:'%', cFlag:'0',cChk:'0',color:'B', 합계:'81.59', 'KN01(SizeMix)':'84.67',  'KN02(SizeMix)':'79.61',  'KN04(G850)':'79.92',  'KN06(SizeMix)':'82.68',  'KN07(SizeMix)':'82.77',  'KN09(SizeMix)':'78.81',  'KN11(SizeMix)':'8',      'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z94',seq:0, title:'Off-Line 적재면적',unit:'ft²',cFlag:'0',cChk:'0',color:'B',합계:'2,193,764','KN01(SizeMix)':'254,952','KN02(SizeMix)':'165,793','KN04(G850)':'197,458','KN06(SizeMix)':'220,249','KN07(SizeMix)':'258,304','KN09(SizeMix)':'160,127','KN11(SizeMix)':'149',   'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z95',seq:0, title:'Off-Line 적재률',unit:'%',  cFlag:'0',cChk:'0',color:'B', 합계:'88.93', 'KN01(SizeMix)':'100.00', 'KN02(SizeMix)':'100.00', 'KN04(G850)':'100.00', 'KN06(SizeMix)':'74.57',  'KN07(SizeMix)':'100.00', 'KN09(SizeMix)':'71.83',  'KN11(SizeMix)':'9',      'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
-  {gbn:'Z96',seq:0, title:'In-Line Balance',unit:'%',  cFlag:'0',cChk:'0',color:'B', 합계:'30.48', 'KN01(SizeMix)':'100.00', 'KN02(SizeMix)':'0.13',   'KN04(G850)':'82.68',  'KN06(SizeMix)':'21.30',  'KN07(SizeMix)':'7.26',   'KN09(SizeMix)':'64.59',  'KN11(SizeMix)':'6',      'KN12(G860)':'',       'KN13(SizeMix)':'',       'KN14(SizeMix)':'',       'KN15(SizeMix)':'',       'KN17(CBG2)':'',       'KN18(G800)':''},
+// Tank 컬럼 표시 순서
+const TANK_ORDER = [
+  '합계',
+  'KN01(SizeMix)', 'KN02(SizeMix)', 'KN04(G850)',
+  'KN06(SizeMix)', 'KN07(SizeMix)', 'KN09(SizeMix)', 'KN11(SizeMix)',
+  'KN12(G860)',    'KN13(SizeMix)', 'KN14(SizeMix)', 'KN15(SizeMix)',
+  'KN17(CBG2)',    'KN18(G800)',
 ];
 
-// ================================================================
-// ④ 그룹 순서 정렬 + VIEW_SEQ 정렬
-// ================================================================
-RAW_DATA.sort((a, b) => {
-  const ga = GROUP_ORDER[a.gbn] ?? 99;
-  const gb = GROUP_ORDER[b.gbn] ?? 99;
-  if (ga !== gb) return ga - gb;
-  return (a.seq || 0) - (b.seq || 0);
-});
+// 접기/펼치기 상태 (gbn → true=접힘)
+const collapseState = {};
+
+// 피벗된 전체 데이터 (원본 보존용)
+let PIVOT_DATA = [];
 
 // ================================================================
-// ⑤ 그룹별 collapse 상태 관리
-//    cChk=1인 그룹(양품률,시간가동률,성능가동률)은 체크박스로 접기/펼치기
-//    cFlag=1인 그룹(Melting,FDM,BOD,Sample)은 헤더 클릭으로 접기/펼치기
+// 핵심 함수: Raw JSON (Long format) → 피벗 (Wide format)
+//
+// 입력 (1764행 Long format):
+//   { tankCode:'합계', gbnLossCode:'A40', viewSeq:0, remark:'양품률', val:'90.53', ... }
+//   { tankCode:'KN01(SizeMix)', gbnLossCode:'A40', viewSeq:0, remark:'양품률', val:'93.92', ... }
+//   { tankCode:'KN02(SizeMix)', gbnLossCode:'A40', viewSeq:0, remark:'양품률', val:'97.13', ... }
+//   ... (14개 Tank × 같은 행 = 14행이 1행으로 합쳐짐)
+//
+// 출력 (96행 Wide format):
+//   { gbn:'A40', seq:0, title:'양품률', 합계:'90.53', 'KN01(SizeMix)':'93.92', ... }
 // ================================================================
-const collapseState = {};   // gbn -> true(접힘)/false(펼침)
+function pivotRawData(rawRows) {
+  const rowMap = new Map();
 
-// 접기/펼치기 대상 그룹 (체크박스 있는 그룹)
-const COLLAPSIBLE_GROUPS = new Set(
-  RAW_DATA.filter(r => r.cChk === '1').map(r => r.gbn)
-);
-// cFlag=1 헤더가 있는 서브그룹도 접기 가능
-const SUBFLAG_GROUPS = new Set(
-  RAW_DATA.filter(r => r.cFlag === '1' && r.cChk !== '1').map(r => r.gbn)
-);
+  for (const row of rawRows) {
+    // 피벗 키: gbnLossCode + viewSeq + remark 조합으로 행 식별
+    // (같은 항목의 여러 Tank가 이 키로 묶임)
+    const key = `${row.gbnLossCode}||${row.viewSeq}||${row.remark}`;
 
-// ================================================================
-// ⑥ RealGrid 초기화
-// ================================================================
-window.onload = function () {
-  // RealGrid가 로드되지 않은 경우 폴백 테이블 렌더링
-  if (typeof RealGridJS === 'undefined') {
-    renderFallbackTable();
-    return;
+    if (!rowMap.has(key)) {
+      // 행 메타 정보 초기 세팅
+      rowMap.set(key, {
+        gbn:     row.gbnLossCode,
+        seq:     row.viewSeq,
+        lossGbn: row.lossGbn,
+        title:   row.remark,
+        unit:    row.unit,
+        cFlag:   row.cFlag,
+        cChk:    row.cChk,
+        color:   row.colorType,
+      });
+    }
+
+    // tankCode를 컬럼명으로 사용해서 val 값 저장
+    rowMap.get(key)[row.tankCode] = row.val;
   }
 
-  RealGridJS.setRootContext('/realgrid/scripts');
-  initRealGrid();
-};
+  // 그룹 순서 → VIEW_SEQ 순 정렬
+  return Array.from(rowMap.values()).sort((a, b) => {
+    const ga = GROUP_ORDER[a.gbn] ?? 99;
+    const gb = GROUP_ORDER[b.gbn] ?? 99;
+    return ga !== gb ? ga - gb : a.seq - b.seq;
+  });
+}
 
+// 접기/펼치기 상태 반영한 표시 행 반환
+function getVisibleRows() {
+  return PIVOT_DATA.filter(row => {
+    // cChk=1: 체크박스 그룹 헤더 (양품률/시간가동률/성능가동률) → 항상 표시
+    if (row.cChk === '1') return true;
+    // cFlag=1: 서브그룹 헤더 (Melting/FDM/BOD/Sample) → 항상 표시
+    if (row.cFlag === '1') return true;
+    // 그 외 행: 해당 그룹이 접혀있으면 숨김
+    return !collapseState[row.gbn];
+  });
+}
+
+// ================================================================
+// 데이터 로드 → 피벗 변환 → 그리드 렌더링
+// ================================================================
+fetch('raw_data.json')
+  .then(res => {
+    if (!res.ok) throw new Error('파일 없음');
+    return res.json();
+  })
+  .then(rawRows => {
+    console.log(`✅ Raw 로드: ${rawRows.length}행`);
+    PIVOT_DATA = pivotRawData(rawRows);
+    console.log(`✅ 피벗 완료: ${PIVOT_DATA.length}행`);
+
+    if (typeof RealGridJS !== 'undefined') {
+      initRealGrid();
+    } else {
+      renderFallbackTable();
+    }
+  })
+  .catch(err => {
+    document.getElementById('loadingMsg').innerHTML =
+      `<span style="color:red">⚠️ raw_data.json 로드 실패: ${err.message}<br>
+      HTML 파일과 같은 폴더에 raw_data.json을 두거나,<br>
+      실제 API 엔드포인트로 fetch URL을 변경하세요.</span>`;
+  });
+
+// ================================================================
+// RealGrid 초기화
+// ================================================================
 function initRealGrid() {
-  const dataProvider = new RealGridJS.LocalDataProvider();
-  const gridView = new RealGridJS.GridView('realgridDiv');
-  gridView.setDataSource(dataProvider);
+  RealGridJS.setRootContext('/realgrid/scripts');
 
-  // ── 필드 정의 ──────────────────────────────────────────────────
-  const fields = [
+  const dp = new RealGridJS.LocalDataProvider();
+  const gv = new RealGridJS.GridView('realgridDiv');
+  gv.setDataSource(dp);
+
+  // 필드
+  dp.setFields([
     { fieldName: 'gbn' },
     { fieldName: 'seq', dataType: 'number' },
+    { fieldName: 'lossGbn' },
     { fieldName: 'title' },
     { fieldName: 'unit' },
     { fieldName: 'cFlag' },
     { fieldName: 'cChk' },
-    { fieldName: 'colorType' },
-    { fieldName: '합계' },
-    ...TANK_COLS.slice(1).map(tc => ({ fieldName: tc }))
-  ];
-  dataProvider.setFields(fields);
+    { fieldName: 'color' },
+    ...TANK_ORDER.map(t => ({ fieldName: t })),
+  ]);
 
-  // ── 컬럼 정의 ──────────────────────────────────────────────────
-  const columns = [
-    {
-      name: 'chkCol',
-      fieldName: 'cChk',
-      header: { text: '' },
-      width: 28,
+  // 컬럼
+  gv.setColumns([
+    { name:'toggleCol', fieldName:'cChk',  header:{ text:'' },     width:28,  editable:false, styles:{ textAlignment:'center' } },
+    { name:'titleCol',  fieldName:'title', header:{ text:'Title' }, width:200, editable:false },
+    { name:'unitCol',   fieldName:'unit',  header:{ text:'단위' },  width:58,  editable:false, styles:{ textAlignment:'center' } },
+    ...TANK_ORDER.map(t => ({
+      name: t, fieldName: t,
+      header: { text: t },
+      width: t === '합계' ? 120 : 110,
       editable: false,
-      renderer: { type: 'html' },
-      styleCallback: function (grid, dataCell) {
-        return { styleName: 'center-cell' };
-      }
-    },
-    {
-      name: 'titleCol',
-      fieldName: 'title',
-      header: { text: 'Title' },
-      width: 200,
-      editable: false,
-    },
-    {
-      name: 'unitCol',
-      fieldName: 'unit',
-      header: { text: '단위' },
-      width: 60,
-      editable: false,
-      styles: { textAlignment: 'center' }
-    },
-    {
-      name: '합계',
-      fieldName: '합계',
-      header: { text: '합계' },
-      width: 100,
-      editable: false,
-      styles: { textAlignment: 'far' }
-    },
-    ...TANK_COLS.slice(1).map(tc => ({
-      name: tc,
-      fieldName: tc,
-      header: { text: tc },
-      width: 100,
-      editable: false,
-      styles: { textAlignment: 'far' }
-    }))
-  ];
-  gridView.setColumns(columns);
+      styles: { textAlignment: 'far' },
+    })),
+  ]);
 
-  // ── 디스플레이 옵션 ────────────────────────────────────────────
-  gridView.setDisplayOptions({
-    rowHeight: 22,
-    columnMovable: false,
-    columnResizable: true,
-    fitStyle: 'none',
-  });
-  gridView.setFixedOptions({ colCount: 3 });  // Title, 단위, 합계 고정
-  gridView.header.height = 30;
-  gridView.setFooter({ visible: false });
-  gridView.setStateBar({ visible: false });
-  gridView.setCheckBar({ visible: false });  // 기본 체크바 숨김 (커스텀 체크 사용)
+  gv.setDisplayOptions({ rowHeight:22, columnMovable:false, columnResizable:true });
+  gv.setFixedOptions({ colCount: 3 });   // Title, 단위, 합계 고정
+  gv.header.height = 30;
+  gv.setFooter({ visible: false });
+  gv.setStateBar({ visible: false });
+  gv.setCheckBar({ visible: false });
 
-  // ── styleCallback: colorType에 따른 행 스타일 ──────────────────
-  gridView.onGetCellStyle = function (grid, index) {
+  // 행 스타일
+  gv.onGetCellStyle = function(grid, index) {
     const row = grid.getValues(index.itemIndex);
     if (!row) return null;
-    const color = row.colorType;
-    const col = index.column;
-
-    // 그룹 헤더 행 (A = 양품률/시간가동률/성능가동률 헤더)
-    if (color === 'A') {
-      return {
-        background: '#dce6f1',
-        fontBold: true,
-        foreground: '#1e3a5f',
-      };
+    switch (row.color) {
+      case 'A': return { background:'#dce6f1', fontBold:true, foreground:'#1e3a5f' };
+      case 'B': return { background:'#e8eef6', fontBold:true, foreground:'#2c4a70' };
+      case 'D': return { background:'#fafafa', foreground:'#777' };
+      default:  return { background:'#ffffff' };
     }
-    // 서브헤더 행 (B = Melting/FDM/BOD/Summary)
-    if (color === 'B') {
-      return {
-        background: '#e8eef6',
-        fontBold: true,
-        foreground: '#2c4a70',
-      };
-    }
-    // 들여쓰기 행 (D = –Inline, –Offline)
-    if (color === 'D') {
-      return {
-        foreground: '#555',
-        background: '#fafafa',
-      };
-    }
-    // 일반 행 (C)
-    return { background: '#ffffff' };
   };
 
-  // ── 데이터 로드 ────────────────────────────────────────────────
-  const gridRows = buildVisibleRows();
-  dataProvider.setJsonRows(gridRows, 'gbn,seq,title,unit,cFlag,cChk,colorType,합계,' + TANK_COLS.slice(1).join(','));
-  gridView.refresh();
+  // 토글 아이콘
+  gv.onGetCellContent = function(grid, index, value) {
+    if (index.column !== 'toggleCol') return value;
+    const row = grid.getValues(index.itemIndex);
+    if (!row) return '';
+    if (row.cChk === '1') return collapseState[row.gbn] ? '▶' : '▼';
+    if (row.cFlag === '1') return collapseState[row.gbn] ? '▷' : '▽';
+    return '';
+  };
 
-  // ── 체크박스 클릭 처리 (cChk=1 그룹 접기/펼치기) ──────────────
-  gridView.onCellClicked = function (grid, clickData) {
+  // 클릭 → 접기/펼치기
+  gv.onCellClicked = function(grid, clickData) {
     const row = grid.getValues(clickData.itemIndex);
     if (!row) return;
-    const gbn = row.gbn;
-
-    // 체크박스 컬럼 클릭 + cChk=1
-    if (clickData.column === 'chkCol' && row.cChk === '1') {
-      collapseState[gbn] = !collapseState[gbn];
-      reloadGrid(dataProvider, gridView);
-      return;
-    }
-
-    // cFlag=1 서브그룹 헤더 클릭 (Melting, FDM, BOD, Sample) → 해당 그룹 접기
-    if (row.cFlag === '1' && row.cChk !== '1') {
-      collapseState[gbn] = !collapseState[gbn];
-      reloadGrid(dataProvider, gridView);
+    const isHeader = row.cChk === '1' || row.cFlag === '1';
+    if (!isHeader) return;
+    if (clickData.column === 'toggleCol' || clickData.column === 'titleCol') {
+      collapseState[row.gbn] = !collapseState[row.gbn];
+      reloadRealGrid(dp, gv);
     }
   };
 
-  // ── 셀 렌더링: 체크박스 컬럼 커스텀 ──────────────────────────
-  gridView.onGetCellContent = function (grid, index, value) {
-    if (index.column !== 'chkCol') return value;
-    const row = grid.getValues(index.itemIndex);
-    if (!row || row.cChk !== '1') return '';
-    const collapsed = collapseState[row.gbn] || false;
-    return collapsed ? '▶' : '▼';  // 접힘/펼침 아이콘
-  };
+  reloadRealGrid(dp, gv);
+
+  // 전역 참조 (외부에서 재로드 가능)
+  window._dp = dp;
+  window._gv = gv;
 }
 
-// 보여줄 행 필터링 (collapse 상태 반영)
-function buildVisibleRows() {
-  return RAW_DATA.filter(row => {
-    const gbn = row.gbn;
-    // 헤더 행은 항상 표시
-    if (row.cChk === '1' || (row.cFlag === '1' && row.cChk !== '1')) return true;
-    // 해당 그룹이 접혀 있으면 하위 행 숨김
-    if (collapseState[gbn]) return false;
-    return true;
-  });
-}
-
-function reloadGrid(dataProvider, gridView) {
-  const visible = buildVisibleRows();
-  dataProvider.setJsonRows(visible, 'gbn,seq,title,unit,cFlag,cChk,colorType,합계,' + TANK_COLS.slice(1).join(','));
-  gridView.refresh();
+function reloadRealGrid(dp, gv) {
+  const visible = getVisibleRows();
+  const fieldNames = ['gbn','seq','lossGbn','title','unit','cFlag','cChk','color', ...TANK_ORDER];
+  dp.setJsonRows(visible, fieldNames.join(','));
+  gv.refresh();
 }
 
 // ================================================================
-// ⑦ RealGrid 미설치 환경 폴백: 순수 HTML 테이블로 렌더링
-//    (RealGrid 라이선스 없어도 구조 확인 가능)
+// 폴백 테이블 (RealGrid 없을 때 브라우저에서 확인용)
 // ================================================================
 function renderFallbackTable() {
   const container = document.getElementById('realgridDiv');
-  container.style.overflow = 'auto';
+  const rows = getVisibleRows();
 
-  const displayRows = buildVisibleRows();
+  let html = `<div class="fb-wrap"><table class="fb-table"><thead><tr>
+    <th class="sticky-0"></th>
+    <th class="sticky-1">Title</th>
+    <th class="sticky-2">단위</th>
+    ${TANK_ORDER.map(t => `<th>${t}</th>`).join('')}
+  </tr></thead><tbody>`;
 
-  let html = `
-  <table style="border-collapse:collapse;font-size:11px;width:100%;table-layout:fixed;">
-    <colgroup>
-      <col style="width:28px">
-      <col style="width:200px">
-      <col style="width:58px">
-      ${TANK_COLS.map(() => '<col style="width:100px">').join('')}
-    </colgroup>
-    <thead>
-      <tr style="background:#2c4a70;color:#fff;position:sticky;top:0;z-index:10;">
-        <th style="border:1px solid #4a7ab5;padding:4px 2px;text-align:center;"></th>
-        <th style="border:1px solid #4a7ab5;padding:4px 6px;text-align:center;">Title</th>
-        <th style="border:1px solid #4a7ab5;padding:4px 2px;text-align:center;">단위</th>
-        ${TANK_COLS.map(tc => `<th style="border:1px solid #4a7ab5;padding:4px 4px;text-align:center;">${tc}</th>`).join('')}
-      </tr>
-    </thead>
-    <tbody>
-  `;
-
-  for (const row of displayRows) {
-    const color = row.color;
-    let rowBg = '#fff';
-    let fontWeight = 'normal';
-    let fontColor = '#222';
-    let titlePad = '6px';
-
-    if (color === 'A') { rowBg = '#dce6f1'; fontWeight = 'bold'; fontColor = '#1e3a5f'; }
-    else if (color === 'B') { rowBg = '#e8eef6'; fontWeight = 'bold'; fontColor = '#2c4a70'; }
-    else if (color === 'D') { rowBg = '#fafafa'; fontColor = '#555'; titlePad = '16px'; }
-
+  for (const row of rows) {
+    const cls       = `row-${row.color}`;
+    const isChk     = row.cChk  === '1';
+    const isFlag    = row.cFlag === '1' && !isChk;
     const collapsed = collapseState[row.gbn] || false;
-    const isCheckRow = row.cChk === '1';
-    const isFlagRow = row.cFlag === '1' && !isCheckRow;
+    const icon      = isChk  ? (collapsed ? '▶' : '▼')
+                    : isFlag ? (collapsed ? '▷' : '▽') : '';
+    const indentStyle = row.color === 'D' ? 'padding-left:18px;' : '';
+    const clickable   = (isChk || isFlag) ? `onclick="toggle('${row.gbn}')" style="cursor:pointer;${indentStyle}"` : `style="${indentStyle}"`;
 
-    // 체크 아이콘
-    let chkCell = '';
-    if (isCheckRow) {
-      chkCell = `<td style="border:1px solid #ccc;text-align:center;cursor:pointer;background:${rowBg};color:${fontColor};font-weight:bold;"
-        onclick="toggleGroup('${row.gbn}')">${collapsed ? '▶' : '▼'}</td>`;
-    } else if (isFlagRow) {
-      chkCell = `<td style="border:1px solid #ccc;text-align:center;cursor:pointer;background:${rowBg};"
-        onclick="toggleGroup('${row.gbn}')">◆</td>`;
-    } else {
-      chkCell = `<td style="border:1px solid #ccc;background:${rowBg};"></td>`;
-    }
-
-    const titleClick = isFlagRow ? `onclick="toggleGroup('${row.gbn}')" style="cursor:pointer;"` : '';
-
-    const vals = TANK_COLS.map(tc => {
-      const v = row[tc] ?? '';
-      return `<td style="border:1px solid #ccc;padding:3px 6px;text-align:right;background:${rowBg};color:${fontColor};font-weight:${fontWeight};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${v}</td>`;
-    }).join('');
-
-    html += `
-    <tr>
-      ${chkCell}
-      <td ${titleClick} style="border:1px solid #ccc;padding:3px ${titlePad};background:${rowBg};color:${fontColor};font-weight:${fontWeight};overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${row.title}</td>
-      <td style="border:1px solid #ccc;padding:3px 4px;text-align:center;background:${rowBg};color:${fontColor};font-size:10px;">${row.unit}</td>
-      ${vals}
+    html += `<tr class="${cls}">
+      <td class="sticky-0 ${cls}" onclick="toggle('${row.gbn}')">${icon}</td>
+      <td class="sticky-1 ${cls}" ${clickable}>${row.title}</td>
+      <td class="sticky-2 ${cls}">${row.unit}</td>
+      ${TANK_ORDER.map(t => `<td class="val-cell ${cls}">${row[t] ?? ''}</td>`).join('')}
     </tr>`;
   }
 
-  html += '</tbody></table>';
+  html += '</tbody></table></div>';
   container.innerHTML = html;
 }
 
-// 폴백 테이블의 그룹 접기/펼치기
-function toggleGroup(gbn) {
+function toggle(gbn) {
   collapseState[gbn] = !collapseState[gbn];
   renderFallbackTable();
 }
